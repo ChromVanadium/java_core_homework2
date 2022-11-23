@@ -1,5 +1,8 @@
 package lesson4.homework;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 public class Homework {
     public static void main(String[] args) {
         //Базовый
@@ -16,9 +19,22 @@ public class Homework {
         //Hello world!
         //Hello world!
         //Hello world!
+        StringBuilder hw1 = new StringBuilder();
+
+        hw1.append(hi.trim())
+           .append(world.toLowerCase())
+           .append(newLine);
+
+        System.out.println(hw1.toString().repeat(3));
+
 
         // Задание №2 - Написать цикл, который выводит через пробел 100 чисел с приставкой "a".
         // Ожидаемый результат: 1а 2а 3а .. 100а
+        StringBuilder hw2 = new StringBuilder();
+        for(int i=1;i<=100;i++){
+            hw2.append(i).append("a ");
+        }
+        System.out.println(hw2);
 
         // Задание №3
         // Создать два класса, которые описывают виды животных (имеют два атрибута).
@@ -35,12 +51,26 @@ public class Homework {
         // Вывести на экран, количество итераций, которое потребовалось, чтобы дойти до миллиона.
         // Если число отрицательное, то сразу заканчиваем цикл, ничего не выводя.
         // Внимание: число может измениться, и не должно приводить к изменению вашего кода.
+        double finalSum = 1_000_000;
+        int counter=0;
+        while (result<finalSum){
+            result += increment;
+            if(result<0) break;
+            counter++;
+        }
+        System.out.println(counter);
 
         // Задание №2: Дан массив единиц, произвольной длины. Создать цикл, который заменяет каждый
         // нечетный элемент на 0;
         // Например, дано: [1,1,1,1,1]
         // Ожидаемый результат: [0,1,0,1,0]
         // Подсказка: прочитай про операнд "%".
+        int[] numbers = {1,1,1,1,1,1,1,1,1,1};
+        for (int i = 0; i < numbers.length; i++) {
+            if(i%2==0)
+                numbers[i] = 0;
+        }
+        System.out.println(Arrays.toString(numbers));
 
         //Задача №3
         //Создать два массив чисел:
@@ -53,6 +83,19 @@ public class Homework {
         //1,2,5,7,10,2,3,2,17,15,2,6,10,119,150
         //(первый массив - 1,2,5,7,10), (второй массив - 2,3,2,17,15),
         //(результат перемножения - (1*2), (2*3), (5*2), (7*17), (10*15)
+        int array1[] = {1,2,5,7,10};
+        int array2[] = {2,3,2,17,15};
+
+        if(array1.length==array2.length){
+            int[] bigArray = new int[array1.length*3];
+            for(int i=0;i<array1.length;i++){
+                bigArray[i] = array1[i];
+                bigArray[i+array1.length] = array2[i];
+                bigArray[i+array1.length*2] = array1[i]*array2[i];
+            }
+            System.out.println(Arrays.toString(bigArray));
+        }
+
 
         //Задача №4
         //В слове "Hello world!" заменить l на r, сделать все буквы заглавными, выбрать первые 8 символов
