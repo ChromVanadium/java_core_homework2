@@ -1,10 +1,19 @@
 package lesson4.homework;
 
+import lesson4.homework.expert.GeneratorExpertHomework;
+
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 public class Homework {
     public static void main(String[] args) {
+        /*
         //Базовый
         //Задача №1
         //Дано (их менять нельзя)
@@ -40,7 +49,10 @@ public class Homework {
         // Создать два класса, которые описывают виды животных (имеют два атрибута).
         // Написать к ним конструктор, сеттеры, геттеры.
         // Например: класс Кот, класс Собака
-
+        Dog dog = new Dog(2,"Шарик");
+        Cat cat = new Cat(5,"Барсик");
+        System.out.println(dog.toString());
+        System.out.println(cat);
 
         //Продвинутый
         // Задание №1: Написать цикл, который будет прибавлять число к result до тех пор,
@@ -58,7 +70,7 @@ public class Homework {
             if(result<0) break;
             counter++;
         }
-        System.out.println(counter);
+        System.out.println("Количество операций: "+counter);
 
         // Задание №2: Дан массив единиц, произвольной длины. Создать цикл, который заменяет каждый
         // нечетный элемент на 0;
@@ -99,6 +111,11 @@ public class Homework {
 
         //Задача №4
         //В слове "Hello world!" заменить l на r, сделать все буквы заглавными, выбрать первые 8 символов
+        String helloWorld = "Hello world!";
+        System.out.println(helloWorld.replace('l','r'));
+        System.out.println(helloWorld.toUpperCase());
+        System.out.println(helloWorld.substring(0,8));
+        /**/
 
         // Экспертный уровень:
         // Предыстория: Мы находимся в статистическом институте. Хочется понять уровень миграции между регионами за месяц.
@@ -130,5 +147,25 @@ public class Homework {
         // Map (HashMap) - узнать что это, map.get(), map.put(), map.entrySet() - для итерации, entry.getValue(), entry.getKey()
         // <Integer> - обозначает тип который хранится в этой структуре данных (Generics)
         // Регулярные выражения - вытащить регион авто
+
+        Map<Integer, Map<String, String[]>> numbers = new HashMap<>();
+        numbers = GeneratorExpertHomework.getData();
+
+       // numbers.entrySet()
+
+//        for (Map.Entry<Integer, Map<String, String[]>> entry : data.entrySet()) {
+//            String key = entry.getKey();
+//            Object value = entry.getValue();
+//            // ...
+//        }
+
+
+//        String s = "shfh 1992 fjsjdfk 2021 fjfgjgk fkkrlr 2020";
+//        Pattern p = Pattern.compile("\\d{4}");
+//        Matcher m = p.matcher(s);
+//        System.out.println(m.matches());
+//        while(m.find()){
+//            System.out.println(m.group());
+//        };
     }
 }
