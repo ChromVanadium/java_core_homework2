@@ -3,20 +3,19 @@ package lesson4.homework;
 import lesson4.homework.expert.GeneratorExpertHomework;
 
 import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
 public class Homework {
     public static void main(String[] args) {
-        /*
+
         //Базовый
         //Задача №1
         //Дано (их менять нельзя)
+        System.out.println("\nБазовый 1");
+
         String hi = "                Hello ";
         String world = " WoRld!";
         char newLine = '\n';
@@ -39,24 +38,31 @@ public class Homework {
 
         // Задание №2 - Написать цикл, который выводит через пробел 100 чисел с приставкой "a".
         // Ожидаемый результат: 1а 2а 3а .. 100а
+        System.out.println("\nБазовый 2");
+
         StringBuilder hw2 = new StringBuilder();
         for(int i=1;i<=100;i++){
             hw2.append(i).append("a ");
         }
+
         System.out.println(hw2);
 
         // Задание №3
         // Создать два класса, которые описывают виды животных (имеют два атрибута).
         // Написать к ним конструктор, сеттеры, геттеры.
         // Например: класс Кот, класс Собака
+        System.out.println("\nБазовый 3");
+
         Dog dog = new Dog(2,"Шарик");
         Cat cat = new Cat(5,"Барсик");
+
         System.out.println(dog.toString());
         System.out.println(cat);
 
         //Продвинутый
         // Задание №1: Написать цикл, который будет прибавлять число к result до тех пор,
         // пока не получиться больше 1_000_000.
+        System.out.println("\nПродвинутый 1");
         // Дано:
         double increment = 0.01123;
         double result = 0;
@@ -77,6 +83,8 @@ public class Homework {
         // Например, дано: [1,1,1,1,1]
         // Ожидаемый результат: [0,1,0,1,0]
         // Подсказка: прочитай про операнд "%".
+        System.out.println("\nПродвинутый 2");
+
         int[] numbers = {1,1,1,1,1,1,1,1,1,1};
         for (int i = 0; i < numbers.length; i++) {
             if(i%2==0)
@@ -95,6 +103,8 @@ public class Homework {
         //1,2,5,7,10,2,3,2,17,15,2,6,10,119,150
         //(первый массив - 1,2,5,7,10), (второй массив - 2,3,2,17,15),
         //(результат перемножения - (1*2), (2*3), (5*2), (7*17), (10*15)
+        System.out.println("\nПродвинутый 3");
+
         int array1[] = {1,2,5,7,10};
         int array2[] = {2,3,2,17,15};
 
@@ -111,11 +121,13 @@ public class Homework {
 
         //Задача №4
         //В слове "Hello world!" заменить l на r, сделать все буквы заглавными, выбрать первые 8 символов
+        System.out.println("\nПродвинутый 4");
+
         String helloWorld = "Hello world!";
         System.out.println(helloWorld.replace('l','r'));
         System.out.println(helloWorld.toUpperCase());
         System.out.println(helloWorld.substring(0,8));
-        /**/
+
 
         // Экспертный уровень:
         // Предыстория: Мы находимся в статистическом институте. Хочется понять уровень миграции между регионами за месяц.
@@ -147,25 +159,41 @@ public class Homework {
         // Map (HashMap) - узнать что это, map.get(), map.put(), map.entrySet() - для итерации, entry.getValue(), entry.getKey()
         // <Integer> - обозначает тип который хранится в этой структуре данных (Generics)
         // Регулярные выражения - вытащить регион авто
+        System.out.println("\nЭкспертный");
 
-        Map<Integer, Map<String, String[]>> numbers = new HashMap<>();
-        numbers = GeneratorExpertHomework.getData();
+        Map<Integer, Map<String, String[]>> gosNumbers = new HashMap<>();
+        gosNumbers = GeneratorExpertHomework.getData();
 
-       // numbers.entrySet()
+        Set<String> foundNumbers = new HashSet<>();
+        int specialsCount = 0;
+        Pattern p = Pattern.compile("М\\d{3}АВ\\d{2,3}");
+        for (Map.Entry<Integer, Map<String, String[]>> entry : gosNumbers.entrySet()) {
+            Integer region = entry.getKey();
+            Map<String, String[]> value = entry.getValue();
+            //System.out.println(region);
+            for(Map.Entry<String, String[]> subEntry: value.entrySet()){
+                String movement = subEntry.getKey();
+                String[] subValues = subEntry.getValue();
 
-//        for (Map.Entry<Integer, Map<String, String[]>> entry : data.entrySet()) {
-//            String key = entry.getKey();
-//            Object value = entry.getValue();
-//            // ...
-//        }
+                for(String gn: subValues){
+                    Matcher m = p.matcher(gn);
+                    if(m.matches()){
+                        if(!foundNumbers.contains(gn)){
+                            specialsCount++;
+                            foundNumbers.add(gn);
+                        }
+                        System.out.println( new StringBuilder()
+                                                .append(gn).append(" ")
+                                .append(movement.equalsIgnoreCase("out") ? "покинул " : "прибыл в ")
+                                .append("регион ")
+                                .append(region)
+                        );
+                    }
+                }
+            }
+        }
+        System.out.println("Список спецномеров: ");
+        System.out.println(foundNumbers.toString());
 
-
-//        String s = "shfh 1992 fjsjdfk 2021 fjfgjgk fkkrlr 2020";
-//        Pattern p = Pattern.compile("\\d{4}");
-//        Matcher m = p.matcher(s);
-//        System.out.println(m.matches());
-//        while(m.find()){
-//            System.out.println(m.group());
-//        };
     }
 }
