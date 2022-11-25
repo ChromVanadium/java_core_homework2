@@ -73,7 +73,7 @@ public class Homework {
         int counter=0;
         while (result<finalSum){
             result += increment;
-            if(result<0) break;
+            if(result<0) { break; }
             counter++;
         }
         System.out.println("Количество операций: "+counter);
@@ -108,8 +108,10 @@ public class Homework {
         int array1[] = {1,2,5,7,10};
         int array2[] = {2,3,2,17,15};
 
+        int[] bigArray = new int[array1.length*3];
+
         if(array1.length==array2.length){
-            int[] bigArray = new int[array1.length*3];
+
             for(int i=0;i<array1.length;i++){
                 bigArray[i] = array1[i];
                 bigArray[i+array1.length] = array2[i];
@@ -167,10 +169,11 @@ public class Homework {
         Set<String> foundNumbers = new HashSet<>();
         int specialsCount = 0;
         Pattern p = Pattern.compile("М\\d{3}АВ\\d{2,3}");
+
         for (Map.Entry<Integer, Map<String, String[]>> entry : gosNumbers.entrySet()) {
             Integer region = entry.getKey();
             Map<String, String[]> value = entry.getValue();
-            //System.out.println(region);
+
             for(Map.Entry<String, String[]> subEntry: value.entrySet()){
                 String movement = subEntry.getKey();
                 String[] subValues = subEntry.getValue();
